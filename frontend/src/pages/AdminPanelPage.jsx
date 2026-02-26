@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/useAuth";
 import { useNavigate } from "react-router-dom";
 
 const AdminPanelPage = () => {
@@ -19,7 +19,7 @@ const AdminPanelPage = () => {
       try {
         const res = await api.get("/admin/users");
         setUsers(res.data);
-      } catch (error) {
+      } catch {
         console.error("Failed to fetch users");
       } finally {
         setLoading(false);

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../context/useAuth";
 import { useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
@@ -12,8 +12,8 @@ const SignupForm = () => {
     password: "",
   });
 
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -27,17 +27,11 @@ const SignupForm = () => {
       return setError("All fields are required");
     }
 
-    if (!form.email.includes("@")) {
-      return setError("Enter valid email");
-    }
-
-    if (form.password.length < 6) {
-      return setError("Password must be at least 6 characters");
-    }
-
     try {
       setLoading(true);
+
       await signup(form.name, form.email, form.password);
+
       navigate("/dashboard");
     } catch (err) {
       setError(
@@ -62,7 +56,7 @@ const SignupForm = () => {
         placeholder="Full Name"
         value={form.name}
         onChange={handleChange}
-        className="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-white"
       />
 
       <input
@@ -71,7 +65,7 @@ const SignupForm = () => {
         placeholder="Email"
         value={form.email}
         onChange={handleChange}
-        className="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-white"
       />
 
       <input
@@ -80,13 +74,13 @@ const SignupForm = () => {
         placeholder="Password"
         value={form.password}
         onChange={handleChange}
-        className="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-white"
       />
 
       <button
         type="submit"
         disabled={loading}
-        className="w-full bg-blue-600 hover:bg-blue-700 transition duration-300 p-3 rounded-lg text-white font-semibold disabled:opacity-50"
+        className="w-full bg-blue-600 p-3 rounded-lg text-white disabled:opacity-50"
       >
         {loading ? "Creating Account..." : "Signup"}
       </button>

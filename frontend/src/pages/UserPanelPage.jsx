@@ -1,13 +1,11 @@
-import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/useAuth";
+import { Navigate } from "react-router-dom";
 
 const UserPanelPage = () => {
   const { user, logout } = useAuth();
-  const navigate = useNavigate();
 
   if (!user) {
-    navigate("/login");
-    return null;
+    return <Navigate to="/login" replace />;
   }
 
   return (

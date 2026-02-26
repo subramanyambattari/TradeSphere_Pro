@@ -31,15 +31,13 @@ const StockDetailsPage = () => {
     const fetchStock = async () => {
       try {
         const res = await api.get(`/stocks/${symbol}`);
-        const quote = res.data["Global Quote"];
-
-        if (!quote) {
+        const quote = res.data;
+        if (!quote || !quote.symbol) {
           setError("Invalid stock data");
           return;
         }
-
         setStock(quote);
-      } catch (err) {
+      } catch {
         setError("Failed to load stock");
       } finally {
         setLoading(false);
@@ -63,10 +61,10 @@ const StockDetailsPage = () => {
       {
         label: `${symbol} Data`,
         data: [
-          parseFloat(stock["02. open"]),
-          parseFloat(stock["03. high"]),
-          parseFloat(stock["04. low"]),
-          parseFloat(stock["05. price"]),
+          parseFloat(stock.open),
+          parseFloat(stock.high),
+          parseFloat(stock.low),
+          parseFloat(stock.close),
         ],
         borderColor: "blue",
         tension: 0.4,
@@ -81,10 +79,10 @@ const StockDetailsPage = () => {
       </h1>
 
       <div className="bg-white shadow-md rounded-xl p-6 mb-6">
-        <p><strong>Price:</strong> {stock["05. price"]}</p>
-        <p><strong>Change:</strong> {stock["09. change"]}</p>
-        <p><strong>Change %:</strong> {stock["10. change percent"]}</p>
-        <p><strong>Volume:</strong> {stock["06. volume"]}</p>
+        <p><strong>Price:</strong> {stock.close}</p>
+        <p><strong>Change:</strong> {stock.change}</p>
+        <p><strong>Change %:</strong> {stock.percent_change}%</p>
+        <p><strong>Volume:</strong> {stock.volume}</p>
       </div>
 
       <div className="bg-white shadow-md rounded-xl p-6">
