@@ -9,7 +9,7 @@ export const createTransaction = async (req, res) => {
   }
 
   const transaction = await Transaction.create({
-    user: req.user._id,
+    user: req.user._id, 
     symbol: symbol.toUpperCase(),
     type,
     quantity,
