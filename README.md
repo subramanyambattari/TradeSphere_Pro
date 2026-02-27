@@ -5,7 +5,7 @@ TradeSphere Pro is a full-stack stock trading dashboard web app where users can 
 ## Live Deployment
 
 - Frontend (Vercel): `https://trade-sphere-pro.vercel.app`
-- Backend (Render): `https://<your-render-backend>.onrender.com`
+- Backend (Render): `https://tradesphere-pro.onrender.com`
 
 ## Features
 
@@ -53,6 +53,7 @@ TradeSphere-Pro/
     ├── src/
     ├── vercel.json
     └── package.json
+
 ## Contact
 
 - Name: Subramanyam Battari
